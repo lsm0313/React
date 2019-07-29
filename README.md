@@ -1,5 +1,5 @@
 ## Management System
-
+강의 수강목적
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
