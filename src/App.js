@@ -6,6 +6,7 @@ function App() {
   return (
     < div className = "gary-background" >
       <img src={logo} lat="logo"/>
+      <h2>hello world</h2>
     </div>
   );
 }
