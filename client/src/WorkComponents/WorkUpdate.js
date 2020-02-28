@@ -70,7 +70,7 @@ class WorkUpdate extends React.Component {
     }
 
     fetchSectionOptions(main_IDX, medium_task_code){
-        post('../api/task/getSection', {reason1 : main_IDX, reason2 : medium_task_code}, null)\
+        post('../api/task/getSection', {reason1 : main_IDX, reason2 : medium_task_code}, null)
             .then((response) => {
             this.setState({
                 SectionOption: response.data,  
