@@ -1,0 +1,42 @@
+.todo-list-template {
+    background: rgb(255, 255, 255);
+    width: 512px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); /* 그림자 */ 
+    margin: 0 auto; /* 페이지 중앙 정렬 */
+    margin-top: 4rem;
+}
+  
+.title {
+    padding: 2rem;
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 100;
+    background: rgb(66, 83, 179);
+    color: white;
+    font-family: sans-serif;
+}
+  
+.form-wrapper {
+    padding: 1rem;
+    border-bottom: 1px solid #ffffff;
+}
+  
+.todos-wrapper {
+    min-height: 5rem;
+}
+
+.create-button {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: 1rem;
+    background: rgb(66, 83, 179);
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+}
+  
+.create-button:hover {
+    background: rgb(46, 58, 126);
+}

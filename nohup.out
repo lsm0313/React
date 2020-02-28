@@ -1,0 +1,213 @@
+yarn run v1.21.1
+warning package.json: No license field
+$ concurrently --kill-others-on-fail "yarn server" "yarn client"
+[0] warning package.json: No license field
+[1] warning package.json: No license field
+[0] $ nodemon server.js
+[1] $ cd client && yarn start
+[0] [33m[nodemon] 1.19.2[39m
+[0] [33m[nodemon] to restart at any time, enter `rs`[39m
+[0] [33m[nodemon] watching dir(s): *.*[39m
+[0] [32m[nodemon] starting `node server.js`[39m
+[1] warning ../package.json: No license field
+[1] $ react-scripts start
+[0] events.js:174
+[0]       throw er; // Unhandled 'error' event
+[0]       ^
+[0] 
+[0] Error: listen EADDRINUSE: address already in use :::6000
+[0]     at Server.setupListenHandle [as _listen2] (net.js:1280:14)
+[0]     at listenInCluster (net.js:1328:12)
+[0]     at Server.listen (net.js:1415:7)
+[0]     at Function.listen (/home/ubuntu/management/node_modules/express/lib/application.js:618:24)
+[0]     at Object.<anonymous> (/home/ubuntu/management/server.js:875:5)
+[0]     at Module._compile (internal/modules/cjs/loader.js:778:30)
+[0]     at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+[0]     at Module.load (internal/modules/cjs/loader.js:653:32)
+[0]     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+[0]     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+[0]     at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+[0]     at startup (internal/bootstrap/node.js:283:19)
+[0]     at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+[0] Emitted 'error' event at:
+[0]     at emitErrorNT (net.js:1307:8)
+[0]     at process._tickCallback (internal/process/next_tick.js:63:19)
+[0]     at Function.Module.runMain (internal/modules/cjs/loader.js:834:11)
+[0]     at startup (internal/bootstrap/node.js:283:19)
+[0]     at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+[0] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[1] Starting the development server...
+[1] 
+[1] Browserslist: caniuse-lite is outdated. Please run next command `yarn upgrade`
+[1] Compiled with warnings.
+[1] 
+[1] ./src/components/CustomerUpdate.js
+[1]   Line 100:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1] 
+[1] ./src/WorkComponents/WorkAdd.js
+[1]   Line 125:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1]   Line 151:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1]   Line 251:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1] 
+[1] ./src/WorkStatus/WorkStatus.js
+[1]   Line 12:   'InputBase' is defined but never used     no-unused-vars
+[1]   Line 14:   'SearchIcon' is defined but never used    no-unused-vars
+[1]   Line 16:  'post' is defined but never used          no-unused-vars
+[1]   Line 19:   'searchResult' is defined but never used  no-unused-vars
+[1] 
+[1] ./src/WorkComponents/WorkUpdate.js
+[1]   Line 166:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1] 
+[1] ./src/WorkComponents/WorkNextStep.js
+[1]   Line 38:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1]   Line 75:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1] 
+[1] ./src/WorkComponents/WorkDelete.js
+[1]   Line 39:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1] 
+[1] ./src/components/CustomerDelete.js
+[1]   Line 40:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1] 
+[1] ./src/WorkComponents/WorkAdmission.js
+[1]   Line 41:  Implied eval. Consider passing a function instead of a string  no-implied-eval
+[1] 
+[1] Search for the keywords to learn more about each warning.
+[1] To ignore, add // eslint-disable-next-line to the line before.
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[0] [32m[nodemon] restarting due to changes...[39m
+[0] [32m[nodemon] starting `node server.js`[39m
+[1] Compiling...
+[0] events.js:174
+[0]       throw er; // Unhandled 'error' event
+[0]       ^
+[0] 
+[0] Error: listen EADDRINUSE: address already in use :::6000
+[0]     at Server.setupListenHandle [as _listen2] (net.js:1280:14)
+[0]     at listenInCluster (net.js:1328:12)
+[0]     at Server.listen (net.js:1415:7)
+[0]     at Function.listen (/home/ubuntu/management/node_modules/express/lib/application.js:618:24)
+[0]     at Object.<anonymous> (/home/ubuntu/management/server.js:875:5)
+[0]     at Module._compile (internal/modules/cjs/loader.js:778:30)
+[0]     at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+[0]     at Module.load (internal/modules/cjs/loader.js:653:32)
+[0]     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+[0]     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+[0]     at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+[0]     at startup (internal/bootstrap/node.js:283:19)
+[0]     at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+[0] Emitted 'error' event at:
+[0]     at emitErrorNT (net.js:1307:8)
+[0]     at process._tickCallback (internal/process/next_tick.js:63:19)
+[0]     at Function.Module.runMain (internal/modules/cjs/loader.js:834:11)
+[0]     at startup (internal/bootstrap/node.js:283:19)
+[0]     at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+[0] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[1] Failed to compile.
+[1] 
+[1] ./src/components/CustomerAdd.js
+[1] Syntax error: Unexpected token, expected ";" (134:6)
+[1] 
+[1]   132 |         
+[1]   133 |     	}
+[1] > 134 |     }else{
+[1]       |      ^
+[1]   135 |             alert('모든 값을 입력하세요.');
+[1]   136 |     }
+[1]   137 |
+[1] 
+[1] Could not open CustomerAdd.js in the editor.
+[1] 
+[1] To set up the editor integration, add something like REACT_EDITOR=atom to the .env.local file in your project folder and restart the development server. Learn more: https://goo.gl/MMTaZt
+[1] 
+[1] Compiling...
+[0] [32m[nodemon] restarting due to changes...[39m
+[0] [32m[nodemon] starting `node server.js`[39m
+[0] events.js:174
+[0]       throw er; // Unhandled 'error' event
+[0]       ^
+[0] 
+[0] Error: listen EADDRINUSE: address already in use :::6000
+[0]     at Server.setupListenHandle [as _listen2] (net.js:1280:14)
+[0]     at listenInCluster (net.js:1328:12)
+[0]     at Server.listen (net.js:1415:7)
+[0]     at Function.listen (/home/ubuntu/management/node_modules/express/lib/application.js:618:24)
+[0]     at Object.<anonymous> (/home/ubuntu/management/server.js:875:5)
+[0]     at Module._compile (internal/modules/cjs/loader.js:778:30)
+[0]     at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+[0]     at Module.load (internal/modules/cjs/loader.js:653:32)
+[0]     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+[0]     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+[0]     at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+[0]     at startup (internal/bootstrap/node.js:283:19)
+[0]     at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+[0] Emitted 'error' event at:
+[0]     at emitErrorNT (net.js:1307:8)
+[0]     at process._tickCallback (internal/process/next_tick.js:63:19)
+[0]     at Function.Module.runMain (internal/modules/cjs/loader.js:834:11)
+[0]     at startup (internal/bootstrap/node.js:283:19)
+[0]     at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+[0] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[1] Failed to compile.
+[1] 
+[1] ./src/components/CustomerAdd.js
+[1] Syntax error: Unexpected token, expected ";" (134:6)
+[1] 
+[1]   132 |         
+[1]   133 |     	};
+[1] > 134 |     }else{
+[1]       |      ^
+[1]   135 |             alert('모든 값을 입력하세요.');
+[1]   136 |     }
+[1]   137 |
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] Proxy error: Could not proxy request /styles/style.css from ec2-15-165-183-247.ap-northeast-2.compute.amazonaws.com:3000 to http://localhost:6000/.
+[1] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
+[1] 
+[1] The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
+[1] error Command failed with exit code 1.
+[1] info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[1] error Command failed with exit code 1.
+[1] info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[1] yarn client exited with code 1
+--> Sending SIGTERM to other processes..
+[0] yarn server exited with code SIGTERM
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
