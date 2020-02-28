@@ -1,0 +1,14 @@
+body,TABLE,div {
+  font-family: 'Dotum', '돋움', 돋움, Dotum;
+  font-size: '9pt';
+}
+
+code {
+  font-family: 'Dotum', '돋움', 돋움, Dotum;
+  font-size: '9pt';
+}
+
+.Select-menu-outer {
+  top: auto;
+  bottom: 100%;
+}
