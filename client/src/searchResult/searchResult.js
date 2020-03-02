@@ -158,7 +158,7 @@ class ResultView extends Component {
       sortChk: true,
       drawerOpened: false,
     };
-    this.handleClickEvent = this.handleClickEvent.bind(this)
+    //this.handleClickEvent = this.handleClickEvent.bind(this)
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -167,6 +167,9 @@ class ResultView extends Component {
   
   componentWillMount() {
     this.timer = setInterval(this.progress, 20);
+	  if(this.timer===100){
+		clearInterval(this.timer);
+	  }
     this.fetchSearsearchResult();
   }
 

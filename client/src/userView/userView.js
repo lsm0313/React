@@ -183,11 +183,10 @@ class userView extends Component {
       drawerOpened: false,
       dataChk:false,
     };
-    this.handleClickEvent = this.handleClickEvent.bind(this)
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (this.state.customers==='') || (nextState.searchKeyword !== this.state.searchKeyword) || (nextState.classifyFilter !==this.state.classifyFilter)  || (this.state.csvData!==nextState.csvData) || 
+    return (this.state.customers==='') || (nextState.searchKeyword !== this.state.searchKeyword) || (nextState.classifyFilter !==this.state.classifyFilter)  || (this.state.csvData===''&&this.state.csvData!==nextState.csvData) || 
     (nextState.companyFilter !==this.state.companyFilter) || (nextState.modelFilter !==this.state.modelFilter) || (nextState.status_codeFilter !==this.state.status_codeFilter) || 
     (nextState.in_dateFilter !==this.state.in_dateFilter) || (nextState.out_dateFilter !==this.state.out_dateFilter) || (nextState.last_dateFilter !==this.state.last_dateFilter) || 
     (nextState.checkerFilter !==this.state.checkerFilter) || (nextState.sortChk !== this.state.sortChk) || (nextState.drawerOpened !== this.state.drawerOpened)  ||
@@ -212,6 +211,10 @@ class userView extends Component {
     this.fetchCustomersCount();
     this.fetch_CSVdata();
     this.timer = setInterval(this.progress, 20);
+	  if(this.timer===100){
+	  	clearInterval(this.timer);
+	  }
+
   }
 
   progress = () => {
@@ -369,10 +372,9 @@ class userView extends Component {
                 <div className={classes.search}>
                     <select class="form-control" id="searchOption"
                       name="searchOption"
-                      native
                       value={this.state.searchOption}
                       onChange={this.handleValueChange}
-                      inputProps={{name: 'searchOption'}}>>
+                      >
                       <option value="차대번호">차대번호</option>
                       <option value="의뢰 업체명">의뢰 업체명</option>
                     </select>

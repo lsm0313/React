@@ -15,7 +15,6 @@ class home extends React.Component {
             password : '',
             admin : null,
         };
-        this.loginChk = this.loginChk.bind(this);
         this.textInput = React.createRef();
         this.focus = this.focus.bind(this);
         this.textInput2 = React.createRef();

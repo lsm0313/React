@@ -292,7 +292,7 @@ class CustomerAdd extends React.Component{
                                 <FormControl>
                                     <label>구분</label>
                                     <Select
-                                        class="form-control" id="classify"
+                                        id="classify"
                                         name="classify"
                                         native
                                         value={this.state.classify}
@@ -305,7 +305,7 @@ class CustomerAdd extends React.Component{
                                 <FormControl>
                                     <label>입고 사유</label>
                                         <Select
-                                            class="form-control" id="first_in_reason"
+                                            id="first_in_reason"
                                             name="first_in_reason"
                                             native
                                             value={this.state.first_in_reason}
@@ -319,7 +319,7 @@ class CustomerAdd extends React.Component{
                                 <FormControl>
                                     <label>의뢰업체명</label>
                                         <Select
-                                            class="form-control" id="company"
+                                            id="company"
                                             name="company"
                                             native
                                             value={this.state.company}
@@ -333,7 +333,7 @@ class CustomerAdd extends React.Component{
                                 <FormControl>
                                     <label>제조사</label>
                                         <Select
-                                            class="form-control" id="maker"
+                                            id="maker"
                                             name="maker"
                                             native
                                             value={this.state.maker}
@@ -348,7 +348,7 @@ class CustomerAdd extends React.Component{
                                 <FormControl>
                                     <label>모델</label>
                                         <Select
-                                            class="form-control" id="model"
+                                            id="model"
                                             name="model"
                                             native
                                             value={this.state.model}
@@ -362,11 +362,11 @@ class CustomerAdd extends React.Component{
                                         />
                                 </FormControl><br/><br/>
                                 <label>차대번호</label>
-                                <input class="form-control input-sm" id="inputsm" type="text" name="chassis_no" value={this.state.chassis_no.toUpperCase()} onChange={e=>this.validateCarNumber(e.target.value)}/><br/>
+                                <input className="form-control input-sm"  id="inputsm" type="text" name="chassis_no" value={this.state.chassis_no.toUpperCase()} onChange={e=>this.validateCarNumber(e.target.value)}/><br/>
                                 <FormControl>
                                     <label>연식</label>
                                         <Select
-                                            class="form-control" id="year"
+                                            id="year"
                                             name="year"
                                             native
                                             value={this.state.year}

@@ -106,6 +106,9 @@ class DetailsWorkStatus extends React.Component {
     }
     componentWillMount(){
         this.timer = setInterval(this.progress, 20);
+	    if(this.timer===100){
+		clearInterval(this.timer);
+	    }
         this.fetch_data();
         this.fetch_CSVdata();
         this.getTotal_cost();
@@ -385,7 +388,7 @@ class DetailsWorkStatus extends React.Component {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell colSpan="15" align ="right">
-                                        <div style={{fontSize:18}}>총 금액 (부가세 포함) : <b>{(this.state.total_cost === null && this.state.package_cost === 0) ? 0 : numberAddComma(this.state.total_cost+(this.state.package_cost*1.1))}</b> (원) </div>
+                                        <div style={{fontSize:18}}>총 금액 (부가세 포함) : <b>{(this.state.total_cost === null && this.state.package_cost === 0) ? 0 : numberAddComma(this.state.total_cost+(Math.floor(this.state.package_cost*1.1)))}</b> (원) </div>
                                     </TableCell>
                                 </TableRow>
                             </Table>

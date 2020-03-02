@@ -172,7 +172,7 @@ class adminView extends Component {
       sortChk: true,
       drawerOpened: false,
     };
-    this.handleClickEvent = this.handleClickEvent.bind(this)
+    //this.handleClickEvent = this.handleClickEvent.bind(this)
   }
 
   stateRefresh = () => {
@@ -192,6 +192,9 @@ class adminView extends Component {
 
     this.fetch_CSVdata();
     this.timer = setInterval(this.progress, 20);
+	  if(this.timer===100){
+	  	clearInterval(this.timer);
+	  }
   }
   
   shouldComponentUpdate(nextProps, nextState) {
@@ -362,8 +365,7 @@ class adminView extends Component {
                     name="searchOption"
                     native
                     value={this.state.searchOption}
-                    onChange={this.handleValueChange}
-                    inputProps={{name: 'searchOption'}}>>
+                    onChange={this.handleValueChange}>
                     <option value="차대번호">차대번호</option>
                     <option value="의뢰 업체명">의뢰 업체명</option>
                   </select>

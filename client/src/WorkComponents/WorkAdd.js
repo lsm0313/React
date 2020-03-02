@@ -488,7 +488,7 @@ class WorkAdd extends React.Component{
                         <Typography>
                             <h4>보관 상태 전환</h4>
                             <label>보관료 (1일)</label>
-                            <input class="form-control input-sm" id="storageCost" type="text" 
+                            <input className="form-control input-sm" id="storageCost" type="text" 
                             name="storageCost" value={this.state.storageCost} onChange={this.handleCostValueChange}/><br/>
                         </Typography>
                     </DialogContent>
@@ -506,7 +506,7 @@ class WorkAdd extends React.Component{
                         <Typography>
                             <h4>말소증 추가</h4>
                             <label>말소증 가격</label>
-                            <input class="form-control input-sm" id="cancellationCost" type="text" 
+                            <input className="form-control input-sm" id="cancellationCost" type="text" 
                             name="cancellationCost" value={this.state.cancellationCost} onChange={this.handleCostValueChange}/><br/>
                         </Typography>
                     </DialogContent>
@@ -575,11 +575,10 @@ class WorkAdd extends React.Component{
                             <FormControl>
                                 <label>차대번호</label>
                                 <Select
-                                    class="form-control" id="Chassis_no"
+                                    id="Chassis_no"
                                     name="Chassis_no"
                                     value={this.state.Chassis_no}
                                     onChange={this.onDataChangeChassis_no}
-                                    inputProps={{name: 'Chassis_no'}}
                                     styles={styles1}
                                     menuPlacement="auto"
                                     menuPosition="fixed"
@@ -589,11 +588,10 @@ class WorkAdd extends React.Component{
                             <FormControl>
                                 <label>분류</label>
                                 <Select
-                                    class="form-control" id="Division"
+                                    id="Division"
                                     name="Division"
                                     value={this.state.Division}
                                     onChange={this.onDataChangeDivision}
-                                    inputProps={{name: 'Division'}}
                                     styles={styles1}
                                     menuPlacement="auto"
                                     menuPosition="fixed"
@@ -604,13 +602,12 @@ class WorkAdd extends React.Component{
                             <FormControl>
                                 <label>작업명</label>
                                 <Select
-                                    class="form-control" id="Section"
+                                    id="Section"
                                     name="Section"
                                     closeMenuOnSelect={false}
                                     isMulti
                                     value={this.state.Section}
                                     onChange={this.onDataChange}
-                                    inputProps={{name: 'Section'}}
                                     styles={styles1}
                                     menuPlacement="auto"
                                     menuPosition="fixed"

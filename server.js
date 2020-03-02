@@ -41,9 +41,9 @@ app.get('/api/customers/:page', (req, res) => {
 app.get('/api/customerSearch/:searchKeyword/:searchOption', (req, res) => {
     let sql = '';
     if(req.params.searchOption==="차대번호") {
-        sql =  "SELECT IDX, classify, first_in_reason, company, initial, maker, model, year, chassis_no, reg_date, in_date, out_date, last_date, status_code, release_reason, release_dest, checker, step, auth FROM main WHERE chassis_no LIKE ?";
+        sql =  "SELECT IDX, classify, first_in_reason, company, initial, maker, model, year, chassis_no, reg_date, in_date, out_date, last_date, status_code, release_reason, release_dest, checker, step, auth FROM main WHERE chassis_no LIKE ? and isDeleted = 0";
     }else if(req.params.searchOption === "의뢰 업체명"){
-        sql = "SELECT IDX, classify, first_in_reason, company, initial, maker, model, year, chassis_no, reg_date, in_date, out_date, last_date, status_code, release_reason, release_dest, checker, step, auth FROM main WHERE company LIKE ?";
+        sql = "SELECT IDX, classify, first_in_reason, company, initial, maker, model, year, chassis_no, reg_date, in_date, out_date, last_date, status_code, release_reason, release_dest, checker, step, auth FROM main WHERE company LIKE ? and isDeleted = 0";
     }
 
     let searchKeyword = '%'+req.params.searchKeyword.toUpperCase()+'%';
@@ -154,7 +154,7 @@ app.post('/api/customersAdd', upload.single('image'), (req, res) => {
     let year = req.body.year;
     let chassis_no = req.body.chassis_no; 
     let userName = req.body.userName;
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
+    var today = moment().format('YYYY-MM-DD HH:mm:ss');
     let sql ='';
     let params = [];
     if(first_in_reason !== '기타'){
@@ -199,10 +199,10 @@ app.put('/api/customersUpdate/:id', upload.single('image'), (req, res) => {
     let userName = req.body.userName;
     let params = [];
     let sql = "";
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
+    var today = moment().format('YYYY-MM-DD HH:mm:ss');
     
     if(first_in_reason !== '기타'){
-        sql = `INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?, ?, '차량 정보 수정',?);` + 
+        sql = `INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?, ?, '차량 정보 수정', ?);` + 
         `UPDATE main SET classify = ?, first_in_reason=?, company = ?, initial=(SELECT corp_initial_name FROM category_corp where corp_name=? and reason=?) ,maker = ?, model = ?, year = ?, chassis_no = ? WHERE IDX = ?`   
             params = [userName, chassis_no, today, classify, first_in_reason, company, company, first_in_reason, maker, model, year, chassis_no, req.params.id];
         }
@@ -211,6 +211,10 @@ app.put('/api/customersUpdate/:id', upload.single('image'), (req, res) => {
         `UPDATE main SET classify = ?, first_in_reason=?, company = ?, initial=(SELECT corp_initial_name FROM category_corp where corp_name=?) ,maker = ?, model = ?, year = ?, chassis_no = ? WHERE IDX = ?`   
         params = [userName, chassis_no, today, classify, first_in_reason, company, company, first_in_reason, maker, model, year, chassis_no, req.params.id];
     }
+
+    
+    
+
     
     connection.query(
         sql, params,
@@ -223,7 +227,7 @@ app.put('/api/customersUpdate/:id', upload.single('image'), (req, res) => {
 
 app.delete('/api/customerDelete/:id/:chassis_no/:userName', (req, res) => {
     let sql = "UPDATE main SET isDeleted = 1 WHERE IDX = ?;" + "INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?, ?, '차량 삭제', ?)";
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
+    var today = moment().format('YYYY-MM-DD HH:mm:ss');
     let id= req.params.id;
     let chassis_no = req.params.chassis_no;
     let userName = req.params.userName;
@@ -251,7 +255,7 @@ app.get('/api/customersCount', (req, res) =>{
 })
 
 app.get('/api/now', (req, res) =>{
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');    
+    var today = moment().format('YYYY-MM-DD HH:mm:ss');    
     res.send(today);
 })
 
@@ -338,49 +342,49 @@ app.post('/api/sttsdata', (req, res) =>{
     let chkFirstIn = req.body.chkFirstIn;
     if(chkFinal===true && chkNot_First===true && chkFirstIn === true){
         connection.query(
-            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM main WHERE isDeleted = 0 group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
+            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM erp_step3.main WHERE isDeleted = 0 group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
             (err, rows, fields) => {
                 res.send(rows);
             }  
         );
     }else if(chkFinal===true && chkNot_First===false  && chkFirstIn === true){
         connection.query(
-            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM main WHERE isDeleted = 0 and NOT status_code ='미입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
+            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM erp_step3.main WHERE isDeleted = 0 and NOT status_code ='미입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
             (err, rows, fields) => {
                 res.send(rows);
             }  
         );
     }else if(chkFinal===false && chkNot_First===true  && chkFirstIn === true){
         connection.query(
-            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM main WHERE isDeleted = 0 and NOT status_code ='최종출고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
+            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM erp_step3.main WHERE isDeleted = 0 and NOT status_code ='최종출고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
             (err, rows, fields) => {
                 res.send(rows);
             }  
         );
     }else if(chkFinal===false && chkNot_First===true  && chkFirstIn === false){
         connection.query(
-            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM main WHERE isDeleted = 0 and NOT status_code ='최종출고' and NOT status_code ='입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
+            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM erp_step3.main WHERE isDeleted = 0 and NOT status_code ='최종출고' and NOT status_code ='입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
             (err, rows, fields) => {
                 res.send(rows);
             }  
         );
     }else if(chkFinal===true && chkNot_First===false  && chkFirstIn === false){
         connection.query(
-            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM main WHERE isDeleted = 0 and NOT status_code ='미입고' and NOT status_code ='입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
+            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM erp_step3.main WHERE isDeleted = 0 and NOT status_code ='미입고' and NOT status_code ='입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
             (err, rows, fields) => {
                 res.send(rows);
             }  
         );
     }else if(chkFinal===false && chkNot_First===false  && chkFirstIn === false){
         connection.query(
-            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM main WHERE isDeleted = 0 and NOT status_code ='최종출고' and NOT status_code ='입고' and NOT status_code ='미입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
+            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM erp_step3.main WHERE isDeleted = 0 and NOT status_code ='최종출고' and NOT status_code ='입고' and NOT status_code ='미입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
             (err, rows, fields) => {
                 res.send(rows);
             }  
         );
     }else if(chkFinal===true && chkNot_First===true  && chkFirstIn === false){
         connection.query(
-            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM main WHERE isDeleted = 0 and NOT status_code ='입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
+            "SELECT classify,company,first_in_reason,status_code,count(*) as 대수 FROM erp_step3.main WHERE isDeleted = 0 and NOT status_code ='입고' group by company, first_in_reason,status_code,classify order by classify asc, status_code desc",
             (err, rows, fields) => {
                 res.send(rows);
             }  
@@ -419,8 +423,8 @@ app.get('/api/task/CSVData', (req, res) =>{
     let sql = `select B.IDX AS '순번',A.classify AS '분류', A.company AS '입·출고 의뢰업체명', A.in_date AS '입고 날짜' , A.maker AS '제조사', A.model AS '차량모델', A.chassis_no AS '차대번호', A.checker '입·출고 담당자', 
     B.full_task_code AS '코드번호', B.small_task_name AS '작업명', B.part_cost AS '부품단가', (B.part_cost*0.1) AS '부품비 부가세', B.part_cost+B.part_cost*0.1 AS '총 부품비', 
     B.labor_cost AS '공임비', C.package_cost AS '패키지 금액', B.part_cost+B.part_cost*0.1+B.labor_cost+C.package_cost+C.package_cost*0.1 AS '총 합계', B.task_requester AS '요청자', B.request_date AS '요청날짜', IF(B.approval_status=1,'승인','승인 대기') AS '승인여부',
-    B.approval_date AS '승인날짜', B.task_deadline AS '작업기한', B.performance_status AS '진행상태', B.task_start_date AS '작업 시작 날짜', B.task_end_date AS '작업 완료 날짜'  FROM main A INNER JOIN 
-    task_status B ON A.chassis_no = B.chassis_no AND A.IDX=B.main_IDX LEFT OUTER join task_package C ON A.IDX = C.main_IDX WHERE B.isDeleted = 0 AND A.isDeleted = 0 AND NOT A.status_code ='최종출고' ORDER BY B.request_date DESC`
+    B.approval_date AS '승인날짜', B.task_deadline AS '작업기한', B.performance_status AS '진행상태', B.task_start_date AS '작업 시작 날짜', B.task_end_date AS '작업 완료 날짜', A.out_date AS '출고날짜'  FROM main A INNER JOIN 
+    task_status B ON A.chassis_no = B.chassis_no AND A.IDX=B.main_IDX LEFT OUTER join task_package C ON A.IDX = C.main_IDX WHERE B.isDeleted = 0 AND A.isDeleted = 0  ORDER BY B.request_date DESC`
 
     connection.query(
         sql,
@@ -431,7 +435,7 @@ app.get('/api/task/CSVData', (req, res) =>{
 })
 
 app.get('/api/task/storageCSVData', (req, res) =>{
-    let sql = `SELECT A.IDX AS 'IDX', C.company AS '의뢰 업체명',A.chassis_no AS '차대번호', A.storage_cost AS '보관료 (1일)', A.storage_start_date '보관 시작일', B.reg_date '수A 변경일', C.out_date AS '출고일' FROM task_storage A LEFT OUTER JOIN erp_step3.task_changeBA B ON A.main_IDX=B.main_IDX and A.change_count = B.change_count LEFT OUTER JOIN erp_step3.main C ON A.main_IDX = C.IDX;`
+    let sql = `SELECT A.IDX AS 'IDX', C.company AS '의뢰 업체명',A.chassis_no AS '차대번호', A.storage_cost AS '보관료 (1일)', A.storage_start_date '보관 시작일', B.reg_date '수A 변경일', C.out_date AS '출고일' FROM erp_step3.task_storage A LEFT OUTER JOIN erp_step3.task_changeBA B ON A.main_IDX=B.main_IDX and A.change_count = B.change_count LEFT OUTER JOIN erp_step3.main C ON A.main_IDX = C.IDX;`
 
     connection.query(
         sql,
@@ -539,7 +543,7 @@ app.post('/api/task/getSection', (req, res) =>{
 app.put('/api/task/workAdmission/:IDX', upload.single('image') ,(req, res) =>{
     let sql = '';
     let params = [];
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
+    var today = moment().format('YYYY-MM-DD HH:mm:ss');
 
     let IDX= req.params.IDX;
     let performanceStatus = req.body.performanceStatus;
@@ -590,7 +594,7 @@ app.put('/api/task/workUpdate/:IDX', upload.single('image'), (req, res) => {
     let partCost = req.body.partCost;
     let laborCost = req.body.laborCost;
     
-    var today = moment().format('YYYY.MM.DD HH:mm:ss'); 
+    var today = moment().format('YYYY-MM-DD HH:mm:ss'); 
 
     let sql = '';
     let params = [];
@@ -630,51 +634,36 @@ app.get('/api/task/getWorkCount', (req, res) => {
 })
 
 app.post('/api/task/workAdd', upload.single('image'), (req, res) => {
-    let params = [];
-    let sql = '';
-    let admin = req.body.admin;
+    let main_IDX = req.body.main_IDX;
+    let Chassis_no = req.body.Chassis_no;
+    let full_task_code = req.body.Category + req.body.Division + req.body.Section;
+    let small_task_name = req.body.SectionName;
     let task_deadline = req.body.deadline.replace("T", " ").replace("-", ".").replace("-", ".");
     let UserName = req.body.UserName;
     let partCost = req.body.partCost;
     let laborCost = req.body.laborCost;
-    let main_IDX = req.body.main_IDX;
-    let Chassis_no = req.body.Chassis_no;
-    let length = req.body.length;
+    let admin = req.body.admin;
     
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
-    if(length>=2){ 
-        for(let i=0;i<req.body.Section.length;i++){
-            let full_task_code = req.body.Category + req.body.Division + req.body.Section[i];
-            let small_task_name = req.body.SectionName[i];
-            if(admin >=2){
-                params.push([main_IDX, Chassis_no, full_task_code, small_task_name, task_deadline, partCost, laborCost, UserName, today, '1','작업 대기', '0']);
-            }else{
-                params.push([main_IDX, Chassis_no, full_task_code, small_task_name, task_deadline, partCost, laborCost, UserName, today,'추가 요청', '0']);
-            }
-        }
-    }else{
-        let full_task_code = req.body.Category + req.body.Division + req.body.Section;
-        let small_task_name = req.body.SectionName;
-        if(admin >=2){
-            params.push([main_IDX, Chassis_no, full_task_code, small_task_name, task_deadline, partCost, laborCost, UserName, today, '1','작업 대기', '0']);
-        }else{
-            params.push([main_IDX, Chassis_no, full_task_code, small_task_name, task_deadline, partCost, laborCost, UserName, today,'추가 요청', '0']);
-        }
-    }
+    var today = moment().format('YYYY-MM-DD HH:mm:ss'); 
+
+    let params = [];
+    let sql = '';
     if(admin >=2){
         sql = `INSERT INTO task_status(main_IDX, chassis_no, full_task_code, small_task_name, task_deadline, part_cost, labor_cost, task_requester, request_date, approval_status, performance_status, isDeleted) \
-        VALUES ?;`;
-
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1,'작업 대기', 0);`;
+        params = [main_IDX, Chassis_no, full_task_code, small_task_name, task_deadline, partCost, laborCost, UserName, today];
     }else{
         sql = `INSERT INTO task_status(main_IDX, chassis_no, full_task_code, small_task_name, task_deadline, part_cost, labor_cost, task_requester, request_date, performance_status, isDeleted) \
-        VALUES ?;`;
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '추가 요청', 0);`;
+        params = [main_IDX, Chassis_no, full_task_code, small_task_name, task_deadline, partCost, laborCost, UserName, today];
     }
+     
         
-    connection.query(sql, [params], 
+    
+    connection.query(sql, params, 
         (err, rows, fields) => {
             console.log(err);
-                
-            if (err) throw err;
+            
             res.send(rows);
         }
     );
@@ -686,11 +675,11 @@ app.post('/api/task/packageCost', upload.single('image'), (req, res) => {
     let packageCost = req.body.packageCost;
     let UserName = req.body.UserName;
     let admin = req.body.admin;
-    var today = moment().format('YYYY.MM.DD HH:mm:ss'); 
+    var today = moment().format('YYYY-MM-DD HH:mm:ss'); 
 
     let params = [];
     let sql = '';
-    if(admin >=2){
+    if(admin >= 2){
         sql = `INSERT INTO task_package(main_IDX, chassis_no, package_cost, reg_userName, regDate) \
         VALUES (?, ?, ?, ?, ?);`;
         params = [main_IDX, chassis_no, packageCost, UserName, today];
@@ -703,7 +692,7 @@ app.post('/api/task/packageCost', upload.single('image'), (req, res) => {
     connection.query(sql, params, 
         (err, rows, fields) => {
             console.log(err);
-      
+            
             res.send(rows);
         }
     );
@@ -711,7 +700,7 @@ app.post('/api/task/packageCost', upload.single('image'), (req, res) => {
 
 app.delete('/api/workDelete/:id/:chassis_no/:userName/:admin', (req, res) => {
     let sql = '';
-    var today = moment().format('YYYY.MM.DD HH:mm:ss'); 
+    var today = moment().format('YYYY-MM-DD HH:mm:ss'); 
     let admin = req.params.admin;
     let id= req.params.id;
     let chassis_no = req.params.chassis_no;
@@ -739,7 +728,7 @@ app.delete('/api/workDelete/:id/:chassis_no/:userName/:admin', (req, res) => {
 app.put('/api/task/workStateUpdate/:IDX', upload.single('image'), (req, res) => {
     let sql = '';
     let params = [];
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
+    var today = moment().format('YYYY-MM-DD HH:mm:ss');
     let IDX= req.params.IDX;
     let chassis_no = req.body.chassis_no;
     let userName = req.body.userName;
@@ -767,46 +756,23 @@ app.put('/api/task/workStateUpdate/:IDX', upload.single('image'), (req, res) => 
 app.put('/api/task/workStateUpdateStorage/', upload.single('image'), (req, res) => {
     let sql = '';
     let params = [];
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
+    var today = moment().format('YYYY-MM-DD HH:mm:ss');
     let main_IDX= req.body.main_IDX;
     let chassis_no = req.body.chassis_no;
     let userName = req.body.userName;
     let storageCost = req.body.storageCost;
-    
-    sql = `INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?,?,?,?); \
-        INSERT INTO task_storage(storage_cost, storage_start_date, main_IDX, chassis_no, change_count) VALUES(?,?,?,?,(Select ifnull(count(*),1) from task_changeBA where main_IDX=? and chassis_no=?)); \
+    let first_in_reason = req.body.first_in_reason;
+    console.log(first_in_reason);
+    if(first_in_reason==='수A' || first_in_reason==='수B'){
+        sql = `INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?,?,?,?); \
+        INSERT INTO task_storage(storage_cost, storage_start_date, main_IDX, chassis_no, change_count) VALUES(?,?,?,?,(Select ifnull(change_count+1,1) from task_changeBA where main_IDX=? and chassis_no=?)); \
         update main set status_code =? where IDX =?;`;
-        params = [userName, chassis_no, '보관 시작', today, storageCost, today, main_IDX, chassis_no, main_IDX, chassis_no, '보관', main_IDX];
-    connection.query(
-        sql, params,
-        (err, rows, fields) => {
-            console.log(err);
-                
-            res.send(rows);
-        }  
-    );
-});
-
-app.put('/api/task/workStateUpdateCancellation/', upload.single('image'), (req, res) => {
-    let sql = '';
-    let params = [];
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
-    let main_IDX= req.body.main_IDX;
-    let chassis_no = req.body.chassis_no;
-    let userName = req.body.userName;
-    let cancellationCost = req.body.cancellationCost;
-    let admin = req.body.admin;
-    
-    var deadline = moment().add(1, 'd').format('YYYY-MM-DDTHH:mm');
-    if(admin!=='2'){
-    sql = `INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?,?,?,?); \
-        INSERT INTO task_status(main_IDX, chassis_no, full_task_code, small_task_name, task_deadline, labor_cost, task_requester, request_date, performance_status) VALUES(?,?,?,?,?,?,?,?,?);`
-        params = [userName, chassis_no, '말소 추가', today, main_IDX, chassis_no, '20202', '말소', deadline, cancellationCost, userName, today, '추가 요청'];
     }else{
         sql = `INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?,?,?,?); \
-        INSERT INTO task_status(main_IDX, chassis_no, full_task_code, small_task_name, task_deadline, labor_cost, task_requester, request_date, performance_status, approval_status, approval_date, approbator) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);`
-        params = [userName, chassis_no, '말소 추가', today, main_IDX, chassis_no, '20202', '말소', deadline, cancellationCost, userName, today, '작업 대기', 1, today, userName];
+        INSERT INTO task_storage(storage_cost, storage_start_date, main_IDX, chassis_no, change_count) VALUES(?,?,?,?,(Select ifnull(change_count+1,1) from task_changeBA where main_IDX=? and chassis_no=?)); \
+        update main set status_code =? where IDX =?;`;
     }
+        params = [userName, chassis_no, '보관 시작', today, storageCost, today, main_IDX, chassis_no, main_IDX, chassis_no, '보관', main_IDX];
     connection.query(
         sql, params,
         (err, rows, fields) => {
@@ -820,13 +786,19 @@ app.put('/api/task/workStateUpdateCancellation/', upload.single('image'), (req, 
 app.put('/api/task/changeBA/', upload.single('image'), (req, res) => {
     let sql = '';
     let params = [];
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
+    var today = moment().format('YYYY-MM-DD HH:mm:ss');
     let main_IDX= req.body.main_IDX;
     let chassis_no = req.body.chassis_no;
     let userName = req.body.userName;
+    let first_in_reason = req.body.first_in_reason;
+    console.log(first_in_reason);
     
-    sql = `INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?,?,?,?); \ update main set status_code =? where IDX =?; \ INSERT INTO task_changeBA(main_IDX, change_count, chassis_no, reg_date)VALUES(?,(Select ifnull(count(*),0) from task_storage where main_IDX=? and chassis_no=?),?,?);`;
-        params = [userName, chassis_no, '수A 변경', today, '수A', main_IDX, main_IDX, main_IDX, chassis_no, chassis_no, today];
+    if(first_in_reason==='수A' || first_in_reason==='수B'){
+        sql = `INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?,?,?,?); \ update main set status_code =? where IDX =?; \ INSERT INTO task_changeBA(main_IDX, change_count, chassis_no, reg_date)VALUES(?,(Select ifnull(change_count+1,1) from task_storage where main_IDX=? and chassis_no=?),?,?);`;
+    }else{
+        sql = `INSERT INTO yms_system_log.web_log(actor, chassis_no, command, datetime) VALUES(?,?,?,?); \ update main set status_code =? where IDX =?; \ INSERT INTO task_changeBA(main_IDX, change_count, chassis_no, reg_date)VALUES(?,(Select ifnull(change_count+1,1) from task_storage where main_IDX=? and chassis_no=?),?,?);`;
+    }
+    params = [userName, chassis_no, '수A 변경', today, '수A', main_IDX, main_IDX, main_IDX, chassis_no, chassis_no, today];
     connection.query(
         sql, params,
         (err, rows, fields) => {
@@ -840,12 +812,13 @@ app.put('/api/task/changeBA/', upload.single('image'), (req, res) => {
 app.post('/api/task/get/packageCost', (req,res)=> {
     let main_IDX= req.body.main_IDX;
     let chassis_no = req.body.chassis_no;
+    console.log(main_IDX);
     
     let params = [main_IDX, chassis_no];
     connection.query(
         "SELECT package_cost FROM task_package WHERE main_IDX = ? AND chassis_no = ?;", params,
         (err, rows, fields) => {
-            console.log(rows);
+            console.log(err);
             
             res.json(rows);
         });
@@ -854,7 +827,7 @@ app.post('/api/task/get/packageCost', (req,res)=> {
 app.put('/api/task/packageCostUpdate', upload.single('image'), (req, res) => {
     let sql = '';
     let params = [];
-    var today = moment().format('YYYY.MM.DD HH:mm:ss');
+    var today = moment().format('YYYY-MM-DD HH:mm:ss');
     let main_IDX= req.body.main_IDX;
     let chassis_no = req.body.chassis_no;
     let userName = req.body.userName;

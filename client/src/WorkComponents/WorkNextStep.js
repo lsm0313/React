@@ -129,7 +129,7 @@ class WorkNextStep extends React.Component{
                             <Typography>
                                 <h4>보관 상태 전환</h4>
                                 <label>보관료 (1일)</label>
-                                <input class="form-control input-sm" id="storageCost" type="text" 
+                                <input className="form-control input-sm" id="storageCost" type="text" 
                                 name="storageCost" value={this.state.storageCost} onChange={this.handleCostValueChange}/><br/>
                             </Typography>
                         </DialogContent>

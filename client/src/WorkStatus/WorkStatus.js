@@ -9,14 +9,14 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
+//import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import SearchIcon from '@material-ui/icons/Search';
+//import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
-import { get,post } from 'axios';
+import { get } from 'axios';
 import { CSVLink } from "react-csv";
 import {Route} from 'react-router-dom';
-import {searchResult} from '../searchResult';
+//import {searchResult} from '../searchResult';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Drawer from '@material-ui/core/Drawer';
@@ -160,6 +160,9 @@ class WorkStatus extends React.Component {
       this.makeHttpRequestWithPage();
       this.fetchWorksCount();
       this.timer = setInterval(this.progress, 20);
+	    if(this.timer===100){
+		clearInterval(this.timer);
+	    }
       this.fetch_CSVdata();
       this.fetch_storage_CSVdata();
     }

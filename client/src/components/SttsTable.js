@@ -150,7 +150,7 @@ class SttsTable extends Component {
                 <Table className={classes.appbarTable}>
                     <TableRow>
                         <TableCell rowSpan="2" style={{width : 150}}>
-                        <div class="text-uppercase" align = 'center'>조회시각</div>
+                        <div  align = 'center'>조회시각</div>
                         </TableCell>
                         <TableCell rowSpan="2">
                         <div align = 'center'>미입고 대수</div>

@@ -343,12 +343,10 @@ class CustomerUpdate extends React.Component {
                         <FormControl>
                             <label>구분</label>
                                 <Select
-                                    class="form-control" id="classify"
+                                    id="classify"
                                     name="classify"
-                                    native
                                     value={this.state.classify}
                                     onChange={this.onDataChangeClassify}
-                                    inputProps={{name: 'classify'}}
                                     styles={styles}
                                     options={classifyOptions}
                                 />
@@ -356,12 +354,10 @@ class CustomerUpdate extends React.Component {
                             <FormControl>
                                 <label>입고 사유</label>
                                     <Select
-                                        class="form-control" id="first_in_reason"
+                                        id="first_in_reason"
                                         name="first_in_reason"
-                                        native
                                         value={this.state.first_in_reason}
                                         onChange={this.onDataChangeFirst_in_reason}
-                                        inputProps={{name: 'first_in_reason'}}
                                         styles={styles1}
                                         options={first_in_reasonOptions}
                                         isDisabled={this.state.chkSelectClassify}
@@ -370,12 +366,10 @@ class CustomerUpdate extends React.Component {
                             <FormControl>
                                 <label>의뢰업체명</label>
                                     <Select
-                                        class="form-control" id="company"
+                                        id="company"
                                         name="company"
-                                        native
                                         value={this.state.company}
                                         onChange={this.onDataChange}
-                                        inputProps={{name: 'company'}}
                                         styles={styles1}
                                         options={companyOptions}
                                         isDisabled={this.state.chkSelectFirst_in_reason}
@@ -384,12 +378,10 @@ class CustomerUpdate extends React.Component {
                             <FormControl>
                                 <label>제조사</label>
                                     <Select
-                                        class="form-control" id="maker"
+                                        id="maker"
                                         name="maker"
-                                        native
                                         value={this.state.maker}
                                         onChange={this.onDataChangeMaker}
-                                        inputProps={{name: 'maker'}}
                                         styles={styles1}
                                         menuPlacement="auto"
                                         menuPosition="fixed"
@@ -399,29 +391,25 @@ class CustomerUpdate extends React.Component {
                             <FormControl>
                                 <label>모델</label>
                                     <Select
-                                        class="form-control" id="model"
+                                        id="model"
                                         name="model"
-                                        native
                                         value={this.state.model}
                                         onChange={this.onDataChange}
-                                        inputProps={{name: 'model'}}
                                         styles={styles1}
                                         menuPlacement="auto"
                                         menuPosition="fixed"
                                         options={modelOptions}
                                     />
                             </FormControl><br/><br/>
-                            <label for="inputsm">차대번호</label>
-                            <input class="form-control input-sm" id="inputsm" type="text" name="chassis_no" value={this.state.chassis_no.toUpperCase()} onChange={e=>this.validateCarNumber(e.target.value)}/><br/>
+                            <label>차대번호</label>
+                            <input className="form-control input-sm" id="inputsm" type="text" name="chassis_no" value={this.state.chassis_no.toUpperCase()} onChange={e=>this.validateCarNumber(e.target.value)}/><br/>
                             <FormControl>
                                 <label>연식</label>
                                     <Select
-                                        class="form-control" id="year"
+                                        id="year"
                                         name="year"
-                                        native
                                         value={this.state.year}
                                         onChange={this.onDataChange}
-                                        inputProps={{name: 'year'}}
                                         styles={styles}
                                         menuPlacement="auto"
                                         menuPosition="fixed"

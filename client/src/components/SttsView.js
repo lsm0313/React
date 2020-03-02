@@ -175,24 +175,33 @@ class SttsView extends React.Component{
     }
 
     handleChkFinal_out_reason = () => {
-        this.setState({
-            chkFinal_out_reason : !this.state.chkFinal_out_reason
+        this.setState(prevState =>{
+		return{
+			...prevState,
+			chkFinal_out_reason : !prevState.chkFinal_out_reason
+		}
         },()=>{
             this.dataTable()
         });   
     };
 
     handleChkNot_First_reason = () => {
-        this.setState({
-            chkNot_First_reason : !this.state.chkNot_First_reason
+        this.setState(prevState =>{
+		return{
+			...prevState,
+            		chkNot_First_reason : !prevState.chkNot_First_reason
+		}
         },()=>{
             this.dataTable()
         });      
     };
 
     handleChkFirst_reason = () => {
-        this.setState({
-            chkFirst_reason : !this.state.chkFirst_reason
+        this.setState(prevState =>{
+		return{
+			...prevState,
+            		chkFirst_reason : !prevState.chkFirst_reason
+		}
         },()=>{
             this.dataTable()
         });      
